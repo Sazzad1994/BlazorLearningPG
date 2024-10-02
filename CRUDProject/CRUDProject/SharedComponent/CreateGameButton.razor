@@ -1,0 +1,13 @@
+﻿
+@using Microsoft.AspNetCore.Components.Web
+@inject NavigationManager navManager
+@rendermode RenderMode.InteractiveServer
+
+<button class="btn btn-warning" @onclick="CreateGame"> Create Game</button>
+
+@code {
+    void CreateGame()
+    {
+        navManager.NavigateTo("/edit-Game");
+    }
+}

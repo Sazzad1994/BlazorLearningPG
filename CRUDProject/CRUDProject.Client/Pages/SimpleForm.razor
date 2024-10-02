@@ -1,0 +1,34 @@
+﻿@rendermode InteractiveAuto
+@inject ILogger<SimpleForm> log
+
+<h3>Simple Form</h3>
+
+<EditForm Enhance Model="Person" method="post" OnInvalidSubmit="SubmitForm" FormName="PersonForm">
+    <DataAnnotationsValidator />
+    
+   <div>
+        <label>First Name</label>
+        <InputText @bind-Value ="Person.FirstName" DisplayName="First Name"/>
+        <ValidationMessage For="@(()=>person.FirstName)"/>
+   </div>
+   <div>
+        <label>Last Name</label>
+        <InputText @bind-Value = Person.LastName" DisplayName="Last Name"/>
+        <ValidationMessage For="@(()=>person.LastName)"/>
+   </div>
+    
+    <button class="btn btn-primary" type="submit"> Add Person</button>
+</EditForm>
+
+@code {
+    [SupplyParameterFromForm]
+    private PersonModel Person { get; set; } = new();
+    private List<PersonModel> people = new ();
+
+    private void SubmitForm(){
+        log.LogInformation($"{Person.FirstName} {person.LastName}");
+        people.Add(person);
+        person = new();
+    
+    }
+}
